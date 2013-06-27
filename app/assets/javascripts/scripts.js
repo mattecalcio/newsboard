@@ -1,4 +1,5 @@
 $(document).ready(function(){
+ $('#loader').show();
   $.getJSON("http://api.feedzilla.com/v1/articles.json?count=31&culture_code=en_us", function(data) {
     var items = [];
     var x     = 1;
@@ -7,6 +8,7 @@ $(document).ready(function(){
       items.push('<tr><td>'+ x++ +'</td><td nowrap><a href="'+val.url +'">' + val.title + '</a></td><td nowrap>'+ val.publish_date +'</td></tr>');
     });
     items.push('</table>');
+    $('#loader').hide();
     $(items.join('')).appendTo('#results');
   });
 
@@ -29,7 +31,8 @@ $(document).ready(function(){
 });
 
 function filter(id){
-    //alert(id);
+    $('#results').empty();
+    $('#loader').show();
     if(id == null){
       $.getJSON("http://api.feedzilla.com/v1/articles.json?count=31&culture_code=en_us", function(data) {
         var items = [];
@@ -39,10 +42,11 @@ function filter(id){
           items.push('<tr><td>'+ x++ +'</td><td nowrap><a href="'+val.url +'">' + val.title + '</a></td><td nowrap>'+ val.publish_date +'</td></tr>');
         });
         items.push('</table>');
-        $('#results').empty();
+        $('#loader').hide();
         $(items.join('')).appendTo('#results');
       });
     }else{
+
       var tempurl = 'http://api.feedzilla.com/v1/categories/'+id+'/articles.json?count=31'
       
       $.getJSON(tempurl, function(data) {
@@ -54,7 +58,7 @@ function filter(id){
           items.push('<tr><td>'+ x++ +'</td><td nowrap><a href="'+val.url +'">' + val.title + '</a></td><td nowrap>'+ val.publish_date +'</td></tr>');
         });
         items.push('</table>');
-        $('#results').empty();
+        $('#loader').hide();
         $(items.join('')).appendTo('#results');
       });
     }

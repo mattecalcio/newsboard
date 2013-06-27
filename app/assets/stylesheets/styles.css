@@ -1,2 +1,21 @@
 #filters { height: 800px; width: 19%; border: 1px solid red; float: left}
-#results { height: 800px; width: 80%; border: 1px solid red; float: right; }
+#container { height: 800px; width: 80%; border: 1px solid red; position: relative; float: right; }
+#results, 
+#loader {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+#loader {
+    z-index: 1;
+    padding-top: 10%;
+    padding-left: 20%;
+    width: 200px;
+}
+
+table {
+	margin: 0 auto; /* or margin: 0 auto 0 auto */
+}
